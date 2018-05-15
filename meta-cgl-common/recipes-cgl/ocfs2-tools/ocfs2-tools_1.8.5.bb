@@ -12,19 +12,19 @@ SECTION = "System Environment/Base"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-SRC_URI = "git://oss.oracle.com/git/ocfs2-tools.git \
+SRC_URI = "git://github.com/markfasheh/ocfs2-tools \
     file://0003-vendor-common-o2cb.ocf-add-new-conf-file.patch \
-    file://disable-ocfs2-stack-user-support.patch \
     file://ocfs2-fix-compile-error-when-glibc-upgrade.patch \
+    file://ocfs2-tools-1.8.5-format-fortify.patch \
     file://o2cb.service \
     file://ocfs2.service \
 "
-SRCREV = "0b8be47d61dbdcd08d21c83f0b3993735b884ef9"
+SRCREV = "f1b4d073f08679f97b64b3eb88e586032f92a701"
 S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig systemd
 
-DEPENDS = "corosync cluster-glue openais pacemaker \
+DEPENDS = "corosync pacemaker \
     libxml2 linux-libc-headers libaio \
     e2fsprogs e2fsprogs-native \
 "
