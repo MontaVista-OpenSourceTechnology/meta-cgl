@@ -1,0 +1,22 @@
+--- a/vendor/common/o2cb.init.sh
++++ b/vendor/common/o2cb.init.sh
+@@ -18,7 +18,7 @@
+ # Force LC_ALL=C
+ export LC_ALL=C
+ 
+-if [ -f /etc/redhat-release ]
++if [ -f /etc/init.d/functions ]
+ then
+ . /etc/init.d/functions
+ 
+--- a/vendor/common/ocfs2.init
++++ b/vendor/common/ocfs2.init
+@@ -17,7 +17,7 @@
+ # Description:  Mount OCFS2 volumes at boot.
+ ### END INIT INFO
+ 
+-if [ -f /etc/redhat-release ]
++if [ -f /etc/init.d/functions ]
+ then
+ . /etc/init.d/functions
+ 

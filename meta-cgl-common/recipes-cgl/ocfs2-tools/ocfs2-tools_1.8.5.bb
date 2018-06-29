@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/markfasheh/ocfs2-tools \
     file://0003-vendor-common-o2cb.ocf-add-new-conf-file.patch \
     file://ocfs2-fix-compile-error-when-glibc-upgrade.patch \
     file://ocfs2-tools-1.8.5-format-fortify.patch \
+    file://no-redhat.patch \
     file://o2cb.service \
     file://ocfs2.service \
 "
@@ -28,7 +29,12 @@ DEPENDS = "corosync pacemaker \
     libxml2 linux-libc-headers libaio \
     e2fsprogs e2fsprogs-native \
 "
-RDEPENDS_${PN} = "bash coreutils net-tools module-init-tools e2fsprogs chkconfig glib-2.0"
+
+# lsbinitscripts are needed to replace /etc/init.d/functions supplied by initscripts (systemv)
+# They are not the same code!
+#
+RDEPENDS_${PN} = "bash coreutils net-tools module-init-tools e2fsprogs chkconfig glib-2.0 \
+                  ${@bb.utils.contains('DISTRO_FEATURES','systemd','lsbinitscripts','',d)}"
 
 ASNEEDED_pn-${PN} = ""
 PARALLEL_MAKE = ""
