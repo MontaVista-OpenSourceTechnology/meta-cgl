@@ -1,8 +1,8 @@
 DESCRIPTION = "libwww-perl provides a simple and consistent API to the World Wide Web"
-HOMEPAGE = "http://search.cpan.org/dist/libwww-perl/"
+HOMEPAGE = "https://metacpan.org/release/libwww-perl"
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0+"
-LIC_FILES_CHKSUM = "file://README;beginline=92;endline=98;md5=3da13bc02f8f17ed35ac5d192cae6fe4"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=225d44a95fa3addb1da6d91187ab189f"
 DEPENDS = "liburi-perl-native libhtml-parser-perl-native libhtml-tagset-perl-native"
 RDEPENDS_${PN} += " \
 	libhtml-parser-perl \
@@ -15,9 +15,9 @@ BBCLASSEXTEND = "native"
 
 PR = "r2"
 
-SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/libwww-perl-${PV}.tar.gz;name=libwww-perl-${PV}"
-SRC_URI[libwww-perl-6.05.md5sum] = "637d5f1eb61336ca2caa6e026b382f87"
-SRC_URI[libwww-perl-6.05.sha256sum] = "7b25799ff7eec18e8e4e97dc0cad7b2a5b433b50b13feb59d9179173bee78f23"
+SRC_URI = "https://cpan.metacpan.org/authors/id/E/ET/ETHER/libwww-perl-${PV}.tar.gz;name=libwww-perl-${PV}"
+SRC_URI[libwww-perl-6.35.md5sum] = "19cd0f55f61359c973caa9301ec405bd"
+SRC_URI[libwww-perl-6.35.sha256sum] = "dda2578d7b32152c4afce834761a61d117de286c705a9f7972c7ac6032ca5953"
 
 S = "${WORKDIR}/libwww-perl-${PV}"
 
