@@ -17,8 +17,8 @@ SRC_URI = "https://github.com/ClusterLabs/crmsh/archive/${PV}.tar.gz;downloadfil
            file://tweaks_for_build.patch \
           "
 
-SRC_URI[md5sum] = "0a475d3c56a158dc991de61a26450eb5"
-SRC_URI[sha256sum] = "ac78b7786f6a52cc3d86b3d80b2d8627e84873330cd4846d5ea48869189ad864"
+SRC_URI[md5sum] = "563b463155a652820c8d1319418e88b7"
+SRC_URI[sha256sum] = "364fadb0d0c9619676e10bb75f4ea833a49019aa77ddb26229bc9d1c435585c0"
 
 inherit autotools-brokensep distutils-base
 
