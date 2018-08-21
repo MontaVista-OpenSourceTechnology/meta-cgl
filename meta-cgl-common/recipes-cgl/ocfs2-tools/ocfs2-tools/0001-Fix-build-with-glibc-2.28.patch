@@ -1,0 +1,576 @@
+From fa150e35931123fc630125ebef1901ffb30d421f Mon Sep 17 00:00:00 2001
+From: Robin Lee <cheeselee@fedoraproject.org>
+Date: Tue, 13 Mar 2018 16:39:43 +0800
+Subject: [PATCH] Fix build with glibc 2.28
+
+Since glibc git 663e7d78 (to be 2.28), type loff_t will be only defined
+when _DEFAULT_SOURCE defined. And with _XOPEN_SOURCE defined, _DEFAULT_SOURCE
+will not be defined by default.
+
+Without this fix, build failed with
+
+make[1]: Entering directory '/builddir/build/BUILD/ocfs2-tools-ocfs2-tools-1.8.5/libo2cb'
+gcc -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -mcet -fcf-protection -Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -pipe -fPIC    -I../include -I.  -DHAVE_CMAP -DHAVE_FSDLM  -MD -MP -MF ./.o2cb_abi.d -o o2cb_abi.o -c o2cb_abi.c
+In file included from o2cb_abi.c:52:
+../include/ocfs2/ocfs2.h:222:2: error: unknown type name 'loff_t'
+  loff_t d_off; /* Offset of structure in the file */
+  ^~~~~~
+
+Upstream-Status: Backport[https://github.com/cheese/ocfs2-tools/commit/fa150e35931123fc630125ebef1901ffb30d421f]
+
+Signed-off-by: Robin Lee <cheeselee@fedoraproject.org>
+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+---
+ debugfs.ocfs2/dump_fs_locks.c      | 1 +
+ extras/check_metaecc.c             | 1 +
+ extras/find_allocation_fragments.c | 1 +
+ extras/find_dup_extents.c          | 1 +
+ extras/find_hardlinks.c            | 1 +
+ extras/find_inode_paths.c          | 1 +
+ extras/mark_journal_dirty.c        | 1 +
+ extras/resize_slotmap.c            | 1 +
+ extras/set_random_bits.c           | 1 +
+ fsck.ocfs2/dirblocks.c             | 1 +
+ include/ocfs2/ocfs2.h              | 3 +++
+ libo2cb/o2cb_abi.c                 | 1 +
+ libocfs2/alloc.c                   | 1 +
+ libocfs2/bitmap.c                  | 1 +
+ libocfs2/blockcheck.c              | 1 +
+ libocfs2/blocktype.c               | 1 +
+ libocfs2/cached_inode.c            | 1 +
+ libocfs2/chain.c                   | 1 +
+ libocfs2/chainalloc.c              | 1 +
+ libocfs2/dir_iterate.c             | 1 +
+ libocfs2/dirblock.c                | 1 +
+ libocfs2/expanddir.c               | 1 +
+ libocfs2/extend_file.c             | 1 +
+ libocfs2/extent_map.c              | 1 +
+ libocfs2/extents.c                 | 1 +
+ libocfs2/fileio.c                  | 1 +
+ libocfs2/freefs.c                  | 1 +
+ libocfs2/image.c                   | 1 +
+ libocfs2/inode.c                   | 1 +
+ libocfs2/inode_scan.c              | 1 +
+ libocfs2/link.c                    | 1 +
+ libocfs2/lookup.c                  | 1 +
+ libocfs2/memory.c                  | 1 +
+ libocfs2/mkjournal.c               | 1 +
+ libocfs2/namei.c                   | 1 +
+ libocfs2/openfs.c                  | 1 +
+ libocfs2/refcount.c                | 1 +
+ libocfs2/slot_map.c                | 1 +
+ libocfs2/sysfile.c                 | 1 +
+ libocfs2/truncate.c                | 1 +
+ libocfs2/unlink.c                  | 1 +
+ o2image/o2image.c                  | 1 +
+ 42 files changed, 44 insertions(+)
+
+diff --git a/debugfs.ocfs2/dump_fs_locks.c b/debugfs.ocfs2/dump_fs_locks.c
+index 05f52274..1c673e74 100644
+--- a/debugfs.ocfs2/dump_fs_locks.c
++++ b/debugfs.ocfs2/dump_fs_locks.c
+@@ -24,6 +24,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <sys/types.h>
+diff --git a/extras/check_metaecc.c b/extras/check_metaecc.c
+index 0bf2f3df..bf44c3fe 100644
+--- a/extras/check_metaecc.c
++++ b/extras/check_metaecc.c
+@@ -21,6 +21,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <stdlib.h>
+diff --git a/extras/find_allocation_fragments.c b/extras/find_allocation_fragments.c
+index 990c0906..d767b2a8 100644
+--- a/extras/find_allocation_fragments.c
++++ b/extras/find_allocation_fragments.c
+@@ -25,6 +25,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <unistd.h>
+diff --git a/extras/find_dup_extents.c b/extras/find_dup_extents.c
+index e8961a9c..f811eafc 100644
+--- a/extras/find_dup_extents.c
++++ b/extras/find_dup_extents.c
+@@ -28,6 +28,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <stdlib.h>
+diff --git a/extras/find_hardlinks.c b/extras/find_hardlinks.c
+index 9c9cbeb8..9c7a820e 100644
+--- a/extras/find_hardlinks.c
++++ b/extras/find_hardlinks.c
+@@ -28,6 +28,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <stdlib.h>
+diff --git a/extras/find_inode_paths.c b/extras/find_inode_paths.c
+index f6bb4b94..09dc3240 100644
+--- a/extras/find_inode_paths.c
++++ b/extras/find_inode_paths.c
+@@ -29,6 +29,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <stdlib.h>
+diff --git a/extras/mark_journal_dirty.c b/extras/mark_journal_dirty.c
+index aa36a70e..fccc5a5b 100644
+--- a/extras/mark_journal_dirty.c
++++ b/extras/mark_journal_dirty.c
+@@ -25,6 +25,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <stdlib.h>
+diff --git a/extras/resize_slotmap.c b/extras/resize_slotmap.c
+index 082f544c..485bf282 100644
+--- a/extras/resize_slotmap.c
++++ b/extras/resize_slotmap.c
+@@ -21,6 +21,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <stdlib.h>
+diff --git a/extras/set_random_bits.c b/extras/set_random_bits.c
+index 6bbc7e93..0d627eca 100644
+--- a/extras/set_random_bits.c
++++ b/extras/set_random_bits.c
+@@ -27,6 +27,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <stdlib.h>
+diff --git a/fsck.ocfs2/dirblocks.c b/fsck.ocfs2/dirblocks.c
+index b4b5c059..ba91c013 100644
+--- a/fsck.ocfs2/dirblocks.c
++++ b/fsck.ocfs2/dirblocks.c
+@@ -22,6 +22,7 @@
+  * Just a simple rbtree wrapper to record directory blocks and the inodes
+  * that own them.
+  */
++#define _DEFAULT_SOURCE
+ #include <unistd.h>
+ #include <stdlib.h>
+ #include <string.h>
+diff --git a/include/ocfs2/ocfs2.h b/include/ocfs2/ocfs2.h
+index b937ca31..4cbc8ad6 100644
+--- a/include/ocfs2/ocfs2.h
++++ b/include/ocfs2/ocfs2.h
+@@ -30,6 +30,9 @@
+ #ifndef _XOPEN_SOURCE
+ # define _XOPEN_SOURCE 600
+ #endif
++#ifndef _DEFAULT_SOURCE
++# define _DEFAULT_SOURCE // for loff_t, needed for glibc >= 2.28
++#endif
+ #ifndef _LARGEFILE64_SOURCE
+ # define _LARGEFILE64_SOURCE
+ #endif
+diff --git a/libo2cb/o2cb_abi.c b/libo2cb/o2cb_abi.c
+index 65ca7934..5c6f4b4b 100644
+--- a/libo2cb/o2cb_abi.c
++++ b/libo2cb/o2cb_abi.c
+@@ -18,6 +18,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <inttypes.h>
+diff --git a/libocfs2/alloc.c b/libocfs2/alloc.c
+index df228532..989901fc 100644
+--- a/libocfs2/alloc.c
++++ b/libocfs2/alloc.c
+@@ -24,6 +24,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/bitmap.c b/libocfs2/bitmap.c
+index 72c77e39..3583d9c0 100644
+--- a/libocfs2/bitmap.c
++++ b/libocfs2/bitmap.c
+@@ -23,6 +23,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/blockcheck.c b/libocfs2/blockcheck.c
+index 716253a6..9adec584 100644
+--- a/libocfs2/blockcheck.c
++++ b/libocfs2/blockcheck.c
+@@ -22,6 +22,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #ifdef DEBUG_EXE
+diff --git a/libocfs2/blocktype.c b/libocfs2/blocktype.c
+index 76484f07..82132ba0 100644
+--- a/libocfs2/blocktype.c
++++ b/libocfs2/blocktype.c
+@@ -19,6 +19,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/cached_inode.c b/libocfs2/cached_inode.c
+index 47788b25..4d6efff5 100644
+--- a/libocfs2/cached_inode.c
++++ b/libocfs2/cached_inode.c
+@@ -23,6 +23,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/chain.c b/libocfs2/chain.c
+index cd48845d..2bbc001f 100644
+--- a/libocfs2/chain.c
++++ b/libocfs2/chain.c
+@@ -23,6 +23,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/chainalloc.c b/libocfs2/chainalloc.c
+index 5c603015..cdf629c8 100644
+--- a/libocfs2/chainalloc.c
++++ b/libocfs2/chainalloc.c
+@@ -24,6 +24,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/dir_iterate.c b/libocfs2/dir_iterate.c
+index 9dc1c4b6..bac18ab8 100644
+--- a/libocfs2/dir_iterate.c
++++ b/libocfs2/dir_iterate.c
+@@ -26,6 +26,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <inttypes.h>
+diff --git a/libocfs2/dirblock.c b/libocfs2/dirblock.c
+index dc9418fc..a90081f7 100644
+--- a/libocfs2/dirblock.c
++++ b/libocfs2/dirblock.c
+@@ -26,6 +26,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/expanddir.c b/libocfs2/expanddir.c
+index 11775b57..20d7ef9f 100644
+--- a/libocfs2/expanddir.c
++++ b/libocfs2/expanddir.c
+@@ -26,6 +26,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <stdio.h>
+diff --git a/libocfs2/extend_file.c b/libocfs2/extend_file.c
+index 3c8f41b7..7619cb0a 100644
+--- a/libocfs2/extend_file.c
++++ b/libocfs2/extend_file.c
+@@ -23,6 +23,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/extent_map.c b/libocfs2/extent_map.c
+index ce84d7ec..06bde172 100644
+--- a/libocfs2/extent_map.c
++++ b/libocfs2/extent_map.c
+@@ -23,6 +23,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/extents.c b/libocfs2/extents.c
+index bf49e690..ac377021 100644
+--- a/libocfs2/extents.c
++++ b/libocfs2/extents.c
+@@ -27,6 +27,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/fileio.c b/libocfs2/fileio.c
+index a14a3edb..61673102 100644
+--- a/libocfs2/fileio.c
++++ b/libocfs2/fileio.c
+@@ -26,6 +26,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/freefs.c b/libocfs2/freefs.c
+index e36d8b3d..4213ef8a 100644
+--- a/libocfs2/freefs.c
++++ b/libocfs2/freefs.c
+@@ -26,6 +26,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <stdlib.h>
+diff --git a/libocfs2/image.c b/libocfs2/image.c
+index 4ceab676..24939d10 100644
+--- a/libocfs2/image.c
++++ b/libocfs2/image.c
+@@ -23,6 +23,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <stdio.h>
+diff --git a/libocfs2/inode.c b/libocfs2/inode.c
+index 2f7d570b..c514e6ab 100644
+--- a/libocfs2/inode.c
++++ b/libocfs2/inode.c
+@@ -26,6 +26,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/inode_scan.c b/libocfs2/inode_scan.c
+index 317fc644..b7020d59 100644
+--- a/libocfs2/inode_scan.c
++++ b/libocfs2/inode_scan.c
+@@ -22,6 +22,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/link.c b/libocfs2/link.c
+index 8f389b53..08a5bb21 100644
+--- a/libocfs2/link.c
++++ b/libocfs2/link.c
+@@ -26,6 +26,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/lookup.c b/libocfs2/lookup.c
+index a8d0f3c7..44ac392f 100644
+--- a/libocfs2/lookup.c
++++ b/libocfs2/lookup.c
+@@ -26,6 +26,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/memory.c b/libocfs2/memory.c
+index ecdccc5c..40dc5ae4 100644
+--- a/libocfs2/memory.c
++++ b/libocfs2/memory.c
+@@ -27,6 +27,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/mkjournal.c b/libocfs2/mkjournal.c
+index 6c425626..22b76a14 100644
+--- a/libocfs2/mkjournal.c
++++ b/libocfs2/mkjournal.c
+@@ -26,6 +26,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/namei.c b/libocfs2/namei.c
+index 20c70f02..7159101a 100644
+--- a/libocfs2/namei.c
++++ b/libocfs2/namei.c
+@@ -26,6 +26,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <stdio.h>
+diff --git a/libocfs2/openfs.c b/libocfs2/openfs.c
+index 21a78c1d..2a758bb1 100644
+--- a/libocfs2/openfs.c
++++ b/libocfs2/openfs.c
+@@ -26,6 +26,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/refcount.c b/libocfs2/refcount.c
+index 5756844a..bcf2cdfb 100644
+--- a/libocfs2/refcount.c
++++ b/libocfs2/refcount.c
+@@ -19,6 +19,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/slot_map.c b/libocfs2/slot_map.c
+index 66f35418..923468ce 100644
+--- a/libocfs2/slot_map.c
++++ b/libocfs2/slot_map.c
+@@ -19,6 +19,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include "ocfs2/byteorder.h"
+diff --git a/libocfs2/sysfile.c b/libocfs2/sysfile.c
+index b574dcd0..35c620ad 100644
+--- a/libocfs2/sysfile.c
++++ b/libocfs2/sysfile.c
+@@ -23,6 +23,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600  /* Triggers XOPEN2K in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/truncate.c b/libocfs2/truncate.c
+index fcfd9521..6cdc5646 100644
+--- a/libocfs2/truncate.c
++++ b/libocfs2/truncate.c
+@@ -23,6 +23,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/libocfs2/unlink.c b/libocfs2/unlink.c
+index 1f45f540..425788ad 100644
+--- a/libocfs2/unlink.c
++++ b/libocfs2/unlink.c
+@@ -27,6 +27,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <string.h>
+diff --git a/o2image/o2image.c b/o2image/o2image.c
+index 1dd16ed5..1a1b4970 100644
+--- a/o2image/o2image.c
++++ b/o2image/o2image.c
+@@ -23,6 +23,7 @@
+  */
+ 
+ #define _XOPEN_SOURCE 600 /* Triggers magic in features.h */
++#define _DEFAULT_SOURCE
+ #define _LARGEFILE64_SOURCE
+ 
+ #include <stdio.h>
+-- 
+2.17.1
+

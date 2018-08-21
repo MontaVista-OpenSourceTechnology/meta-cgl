@@ -19,6 +19,8 @@ SRC_URI = "git://github.com/markfasheh/ocfs2-tools \
     file://no-redhat.patch \
     file://o2cb.service \
     file://ocfs2.service \
+    file://0001-Fix-build-with-glibc-2.28.patch \
+    file://0001-mounted.ocfs2-use-sys-sysmacros.h-include-for-makede.patch \
 "
 SRCREV = "f1b4d073f08679f97b64b3eb88e586032f92a701"
 S = "${WORKDIR}/git"
