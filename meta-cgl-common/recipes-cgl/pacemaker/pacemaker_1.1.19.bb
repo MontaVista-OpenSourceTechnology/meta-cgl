@@ -24,8 +24,11 @@ SRC_URI = "https://github.com/ClusterLabs/${BPN}/archive/Pacemaker-${PV}.zip \
            file://volatiles \
            file://tmpfiles \
           "
-SRC_URI[md5sum] = "6f60f733823d31acbef4556fb749c457"
-SRC_URI[sha256sum] = "2642264b27c584eff5747a2a34c7f2bff13d52741e4e5cc70f14b2b6cd1fe7d5"
+
+SRC_URI_append_libc-musl = "file://0001-pacemaker-fix-compile-error-of-musl-libc.patch"
+
+SRC_URI[md5sum] = "deb7017c5a9d3f39895d9ea2c34bc8eb"
+SRC_URI[sha256sum] = "6e222046487c2dc6ae61d49089ecbf6a0bcb495e8cdcb76d115fd987d0df8f7f"
 
 inherit autotools-brokensep pkgconfig systemd python-dir useradd
 
@@ -89,7 +92,7 @@ FILES_${PN} += " ${datadir}/snmp                             \
                  ${libdir}/${PYTHON_DIR}/site-packages \
                "
 FILES_${PN}-dbg += "${libdir}/corosync/lcrso/.debug"
-RDEPENDS_${PN} = "bash python libqb ${PN}-cli-utils"
+RDEPENDS_${PN} = "bash python perl libqb ${PN}-cli-utils"
 
 SYSTEMD_AUTO_ENABLE = "disable"
 
