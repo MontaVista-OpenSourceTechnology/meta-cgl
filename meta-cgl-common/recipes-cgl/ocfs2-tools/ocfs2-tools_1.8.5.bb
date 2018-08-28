@@ -48,6 +48,7 @@ EXTRA_OECONF = " \
     --enable-ocfs2console=no \
     --enable-dynamic-fsck=yes \
     --enable-dynamic-ctl=yes \
+    --with-root-prefix=${root_prefix} \
 "
 
 do_configure_prepend () {
