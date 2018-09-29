@@ -1,0 +1,137 @@
+From 8a7c861e746ef13a2ffe74388891d7ea5709614b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ferenc=20W=C3=A1gner?= <wferi@debian.org>
+Date: Thu, 29 Sep 2016 10:47:49 +0200
+Subject: [PATCH] Make the testing infrastructure optional
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream does not want this option, unfortunately.
+https://github.com/ClusterLabs/pacemaker/pull/1149
+
+Signed-off-by: Ferenc Wágner <wferi@debian.org>
+
+It does not install test case by default
+Backport the patch from ubuntu
+http://archive.ubuntu.com/ubuntu/pool/main/p/pacemaker/pacemaker_1.1.18-0ubuntu1.debian.tar.xz
+Upstream-Status: Deny [https://github.com/ClusterLabs/pacemaker/pull/1149]
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ Makefile.am         | 2 ++
+ configure.ac        | 5 +++++
+ fencing/Makefile.am | 2 ++
+ lrmd/Makefile.am    | 2 ++
+ pengine/Makefile.am | 2 ++
+ tools/Makefile.am   | 2 ++
+ 6 files changed, 15 insertions(+)
+
+diff --git a/Makefile.am b/Makefile.am
+index 874f6ed..9ce8b12 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -35,6 +35,7 @@ ACLOCAL_AMFLAGS  = -I m4
+ licensedir              = $(docdir)/licenses/
+ license_DATA            = $(wildcard licenses/*)
+ 
++if ENABLE_TESTS
+ # Test components
+ SUBDIRS	+= cts
+ 
+@@ -46,6 +47,7 @@ test_DATA		= valgrind-pcmk.suppressions
+ noinst_PROGRAMS = scratch
+ nodist_scratch_SOURCES	= scratch.c
+ scratch_LDADD	= $(top_builddir)/lib/common/libcrmcommon.la -lm
++endif
+ 
+ scratch.c:
+ 	echo 'int main(void){}' >$@
+diff --git a/configure.ac b/configure.ac
+index b87e61b..a0cf3e2 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -330,6 +330,11 @@ AC_ARG_WITH(configdir,
+     [ CONFIGDIR="$withval" ]
+ )
+ 
++AC_ARG_ENABLE([tests],
++    [AS_HELP_STRING([--disable-tests],[don't build and install the testing components])],,
++    [enable_tests=yes])
++AM_CONDITIONAL([ENABLE_TESTS],[test "x$enable_tests" != xno])
++
+ dnl ===============================================
+ dnl General Processing
+ dnl ===============================================
+diff --git a/fencing/Makefile.am b/fencing/Makefile.am
+index 3bb628f..8c06502 100644
+--- a/fencing/Makefile.am
++++ b/fencing/Makefile.am
+@@ -18,8 +18,10 @@
+ include $(top_srcdir)/Makefile.common
+ 
+ ## binary progs
++if ENABLE_TESTS
+ testdir			= $(datadir)/$(PACKAGE)/tests/fencing
+ test_SCRIPTS		= regression.py
++endif
+ 
+ halibdir	= $(CRM_DAEMON_DIR)
+ halib_PROGRAMS	= stonithd stonith-test
+diff --git a/lrmd/Makefile.am b/lrmd/Makefile.am
+index 33611cb..ad6b88d 100644
+--- a/lrmd/Makefile.am
++++ b/lrmd/Makefile.am
+@@ -19,11 +19,13 @@ include $(top_srcdir)/Makefile.common
+ lrmdlibdir		= $(CRM_DAEMON_DIR)
+ lrmdlib_PROGRAMS	= lrmd lrmd_internal_ctl
+ 
++if ENABLE_TESTS
+ # Test components
+ lrmdlib_PROGRAMS	+= lrmd_test
+ 
+ testdir			= $(datadir)/$(PACKAGE)/tests/lrmd
+ test_SCRIPTS		= regression.py
++endif
+ 
+ initdir			= $(INITDIR)
+ init_SCRIPTS		= pacemaker_remote
+diff --git a/pengine/Makefile.am b/pengine/Makefile.am
+index 861946c..3faae3a 100644
+--- a/pengine/Makefile.am
++++ b/pengine/Makefile.am
+@@ -21,6 +21,7 @@ AM_CPPFLAGS	+= -I$(top_builddir) -I$(top_srcdir)
+ 
+ halibdir	= $(CRM_DAEMON_DIR)
+ 
++if ENABLE_TESTS
+ PE_TESTS	= $(wildcard test10/*.scores)
+ 
+ testdir			= $(datadir)/$(PACKAGE)/tests/pengine
+@@ -29,6 +30,7 @@ test_DATA		= regression.core.sh
+ 
+ test10dir		= $(datadir)/$(PACKAGE)/tests/pengine/test10
+ test10_DATA		= $(PE_TESTS) $(PE_TESTS:%.scores=%.xml) $(PE_TESTS:%.scores=%.exp) $(PE_TESTS:%.scores=%.dot) $(PE_TESTS:%.scores=%.summary) $(wildcard test10/*.stderr)
++endif
+ 
+ beekhof:
+ 	echo $(shell ls -1 test10/*.xml)
+diff --git a/tools/Makefile.am b/tools/Makefile.am
+index 3548035..826396d 100644
+--- a/tools/Makefile.am
++++ b/tools/Makefile.am
+@@ -40,10 +40,12 @@ EXTRA_DIST		= $(sbin_SCRIPTS)
+ sbin_PROGRAMS		= crm_simulate crmadmin cibadmin crm_node crm_attribute crm_resource crm_verify \
+ 			 crm_shadow attrd_updater crm_diff crm_mon iso8601 crm_ticket crm_error
+ 
++if ENABLE_TESTS
+ testdir			= $(datadir)/$(PACKAGE)/tests/cli
+ test_SCRIPTS		= regression.sh
+ test_DATA               = regression.dates.exp regression.tools.exp regression.acls.exp \
+ 			  regression.validity.exp
++endif
+ 
+ if BUILD_HEARTBEAT_SUPPORT
+ sbin_PROGRAMS           += crm_uuid
+-- 
+2.7.4
+

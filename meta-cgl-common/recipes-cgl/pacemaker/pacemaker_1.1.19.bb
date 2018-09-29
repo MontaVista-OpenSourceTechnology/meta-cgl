@@ -21,6 +21,7 @@ SRC_URI = "https://github.com/ClusterLabs/${BPN}/archive/Pacemaker-${PV}.zip \
            file://0005-pacemaker-do-not-execute-target-program-while-cross-.patch \
            file://0006-pacemaker-do-not-use-libgnutls-config.patch \
            file://set-OCF_ROOT_DIR-to-libdir-ocf.patch \
+           file://0007-Make-the-testing-infrastructure-optional.patch \
            file://volatiles \
            file://tmpfiles \
           "
@@ -45,6 +46,7 @@ EXTRA_OECONF += "STAGING_INCDIR=${STAGING_INCDIR} \
                  --with-ais \
                  --without-heartbeat \
                  --disable-pretty \
+                 --disable-tests \
                 "
 
 do_install_append() {
