@@ -70,7 +70,8 @@ pkg_postinst_${PN} () {
 	fi
 }
 
-PACKAGES += "\
+NOAUTOPACKAGEDEBUG = "1"
+PACKAGES =+ "\
 	 ${PN}-plugin-test \
 	 ${PN}-plugin-test-dbg \
 	 ${PN}-plugin-test-staticdev \
@@ -104,7 +105,10 @@ FILES_${PN} = "${sysconfdir} /var ${libdir}/lib*.so.* ${sbindir} ${datadir}/clus
 	"
 
 FILES_${PN}-dbg += "${libdir}/heartbeat/.debug/ \
+                    ${sbindir}/.debug/ \
+                    ${libdir}/.debug/ \
                    "
+
 FILES_${PN}-plugin-compress = "${libdir}/heartbeat/plugins/compress/*.so"
 FILES_${PN}-plugin-compress-staticdev = "${libdir}/heartbeat/plugins/compress/*.*a"
 FILES_${PN}-plugin-compress-dbg = "${libdir}/heartbeat/plugins/compress/.debug/"
