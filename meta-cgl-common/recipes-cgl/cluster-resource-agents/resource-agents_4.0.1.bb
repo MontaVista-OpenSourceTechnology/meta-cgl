@@ -55,11 +55,12 @@ do_install_append() {
 # tickle_tcp is published under GPLv3, we just split it into ${PN}-extra,
 # and it's required by portblock, so move portblock into ${PN}-extra together.
 PACKAGES_prepend  = "${PN}-extra ${PN}-extra-dbg ldirectord "
-FILES_${PN}-extra = "${libdir}/resource-agents/heartbeat/tickle_tcp \
+NOAUTOPACKAGEDEBUG = "1"
+FILES_${PN}-extra = "${libexecdir}/heartbeat/tickle_tcp \
                      ${libdir}/ocf/resource.d/heartbeat/portblock \
                      ${datadir}/resource-agents/ocft/configs/portblock \
                     "
-FILES_${PN}-extra-dbg += "${libdir}/resource-agents/heartbeat/.debug/tickle_tcp"
+FILES_${PN}-extra-dbg = "${libexecdir}/heartbeat/.debug/tickle_tcp"
 
 FILES_ldirectord = " \
         ${sbindir}/ldirectord \
@@ -101,4 +102,5 @@ FILES_${PN} += "${datadir}/cluster/* \
                 "
 
 FILES_${PN}-dbg += "${libdir}/ocf/resource.d/heartbeat/.debug \
-                    ${libdir}/resource-agents/heartbeat/.debug "
+                    ${sbindir}/.debug \
+                    ${libexecdir}/heartbeat/.debug "
