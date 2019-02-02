@@ -39,7 +39,7 @@ SRC_URI = " \
 SRC_URI[md5sum] = "101c8f507b1f407468d5ef15ae6719da"
 SRC_URI[sha256sum] = "851d2add2c129fef9fede764fec80229e1f6e7295e0e979950d10258648b462c"
 S = "${WORKDIR}/Heartbeat-3-0-958e11be8686/"
-DEPENDS = "cluster-glue corosync gnutls"
+DEPENDS = "cluster-glue corosync gnutls libxslt-native xmlto-native docbook-xml-dtd4-native docbook-xsl-stylesheets-native intltool"
 RDEPENDS_${PN} += "python"
 inherit autotools-brokensep pkgconfig useradd
 EXTRA_OECONF = " \
