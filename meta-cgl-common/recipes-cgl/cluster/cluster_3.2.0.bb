@@ -3,7 +3,7 @@ DESCRIPTION = "Red Hat Cluster"
 SECTION = "libs"
 HOMEPAGE = "https://fedorahosted.org/cluster/wiki/HomePage"
 
-SRC_URI = "https://fedorahosted.org/releases/c/l/cluster/${BP}.tar.xz \
+SRC_URI = "https://releases.pagure.org/linux-cluster/cluster/${BP}.tar.xz \
            file://0001-Fix-the-kernel-source-patch.patch"
 
 
@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://doc/README.licence;md5=ee8ae43af5ea09f12ca7f7a649764c
 
 PR = "r1"
 
-DEPENDS = "corosync dbus openldap openais libxml2 ncurses perl zlib"
+DEPENDS = "corosync dbus openldap libxml2 ncurses perl zlib"
 
 FILES_${PN} += "/lib/udev/rules.d/51-dlm.rules \
     ${localstatedir}/run "
