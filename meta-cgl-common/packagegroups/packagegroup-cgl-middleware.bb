@@ -43,7 +43,6 @@ RDEPENDS_packagegroup-cgl-middleware = "\
     vlan \
     corosync \
  ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "iscsi-initiator-utils", "",d)} \
-    openais \
     openipmi \
     openhpi \
     pacemaker \
