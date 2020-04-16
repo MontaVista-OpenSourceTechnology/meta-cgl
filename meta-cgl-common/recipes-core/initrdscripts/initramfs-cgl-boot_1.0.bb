@@ -1,8 +1,7 @@
 SUMMARY = "Support for having multipath iSCSI devices as root file system"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://../COPYING.MIT;md5=838c366f69b72c5df05c96dff79b35f2"
+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 SRC_URI = "file://init-boot.sh \
-          file://COPYING.MIT \
 "
 
 do_install() {
