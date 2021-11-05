@@ -13,7 +13,7 @@ RDEPENDS:${PN} += "perl"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=99a60756441098855c538fe86f859afe"
 
-SRC_URI = "git://github.com/zoulasc/racoon2 \
+SRC_URI = "git://github.com/zoulasc/racoon2;branch=master;protocol=https \
            file://0001-Add-DESTDIR-to-install-commands.patch \
            file://0002-Enable-turning-of-kinkd-and-iked.patch \
            file://0003-Replace-perl_bindir-with-usr-bin-env-perl.patch \

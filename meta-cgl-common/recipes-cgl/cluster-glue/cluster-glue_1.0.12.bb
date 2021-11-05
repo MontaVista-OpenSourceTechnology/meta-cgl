@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b70d30a00a451e19d7449d7465d02601 \
 DEPENDS = "libxml2 libtool glib-2.0 bzip2 util-linux net-snmp openhpi"
 
 SRC_URI = " \
-    git://github.com/ClusterLabs/${BPN}.git \
+    git://github.com/ClusterLabs/${BPN}.git;branch=master;protocol=https \
     file://0001-don-t-compile-doc-and-Error-Fix.patch \
     file://0001-ribcl.py.in-Warning-Fix.patch \
     file://0001-Update-for-python3.patch \

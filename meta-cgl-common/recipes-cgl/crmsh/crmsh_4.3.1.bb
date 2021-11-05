@@ -13,7 +13,7 @@ DEPENDS = "asciidoc-native \
 RDEPENDS:${PN} = "pacemaker python3-lxml python3-parallax gawk bash python3-doctest"
 
 S = "${WORKDIR}/git"
-SRC_URI = "git://github.com/ClusterLabs/${BPN}.git \
+SRC_URI = "git://github.com/ClusterLabs/${BPN}.git;branch=master;protocol=https \
            file://tweaks_for_build.patch \
            file://0001-orderedset.py-fix-deprecation-on-collections.Mutable.patch \
           "

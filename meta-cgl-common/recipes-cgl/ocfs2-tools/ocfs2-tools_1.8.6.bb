@@ -12,7 +12,7 @@ SECTION = "System Environment/Base"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ef380476f642c20ebf40fecb0add2ec"
 
-SRC_URI = "git://github.com/markfasheh/ocfs2-tools \
+SRC_URI = "git://github.com/markfasheh/ocfs2-tools;branch=master;protocol=https \
     file://0003-vendor-common-o2cb.ocf-add-new-conf-file.patch \
     file://ocfs2-tools-1.8.5-format-fortify.patch \
     file://no-redhat.patch \
