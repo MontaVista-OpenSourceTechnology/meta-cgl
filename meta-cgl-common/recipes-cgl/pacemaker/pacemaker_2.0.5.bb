@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=000212f361a81b100d9d0f0435040663"
 
 DEPENDS = "corosync libxslt libxml2 gnutls resource-agents libqb python3-native"
 
-SRC_URI = "git://github.com/ClusterLabs/${BPN}.git;branch=master;protocol=https \
+SRC_URI = "git://github.com/ClusterLabs/${BPN}.git;branch=main;protocol=https \
            file://0001-Fix-python3-usage.patch \
            file://0001-pacemaker-set-OCF_ROOT_DIR-to-libdir-ocf.patch \
            file://volatiles \
