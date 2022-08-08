@@ -59,8 +59,8 @@ EXTRA_OECONF += "--disable-fatal-warnings \
                  --with-rsctmpdir=/var/run/heartbeat/rsctmp"
 
 do_install:append() {
-    rm -rf "${D}${localstatedir}/run"
-    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
+    rm -rf ${D}${localstatedir}/run
+    rm -rf ${D}${localstatedir}
 }
 
 # tickle_tcp is published under GPLv3, we just split it into ${PN}-extra,
