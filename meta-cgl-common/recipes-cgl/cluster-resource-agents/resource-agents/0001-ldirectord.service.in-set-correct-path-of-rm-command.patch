@@ -1,0 +1,28 @@
+From d34c5d8611d084db9cb7169e3628f3f752618cc7 Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Sun, 2 Oct 2022 21:08:34 +0800
+Subject: [PATCH] ldirectord.service.in: set correct path of rm command
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ ldirectord/systemd/ldirectord.service.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ldirectord/systemd/ldirectord.service.in b/ldirectord/systemd/ldirectord.service.in
+index 7965b79fb..bb476cf5d 100644
+--- a/ldirectord/systemd/ldirectord.service.in
++++ b/ldirectord/systemd/ldirectord.service.in
+@@ -6,7 +6,7 @@ Documentation=man:ldirectord(8)
+ ExecStart=@sbindir@/ldirectord start
+ ExecStartPost=/usr/bin/touch /var/lock/subsys/ldirectord
+ ExecStop=@sbindir@/ldirectord stop
+-ExecStopPost=@RM@ -f /var/lock/subsys/ldirectord
++ExecStopPost=/bin/rm -f /var/lock/subsys/ldirectord
+ ExecReload=@sbindir@/ldirectord reload
+ PIDFile=/run/ldirectord.ldirectord.pid
+ Type=forking
+-- 
+2.25.1
+
