@@ -20,6 +20,7 @@ SRC_URI = "git://github.com/ClusterLabs/resource-agents;branch=main;protocol=htt
            file://03-fix-header-defs-lookup.patch \
            file://fix-install-sh-not-found.patch \
            file://0001-ldirectord.service.in-use-run-instead-of-var-run.patch \
+           file://0001-ldirectord.service.in-set-correct-path-of-rm-command.patch \
           "
 
 SRCREV = "fee181320547365d7f8c88cca2b32801412b933d" 
