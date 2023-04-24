@@ -84,6 +84,12 @@ do_install:append() {
     do
         sed -i "s:${RECIPE_SYSROOT_NATIVE}::g" $temdir
     done
+
+    hostdir=$(grep -Rn ${HOSTTOOLS_DIR} ${D}/* | awk -F: '{print $1}' | uniq)
+    for tmpdir in $hostdir
+   do
+        sed -i "s:${HOSTTOOLS_DIR}::g" $tmpdir
+    done
 }
 
 PACKAGES:prepend = "${PN}-cli-utils ${PN}-libs ${PN}-cluster-libs ${PN}-remote "
