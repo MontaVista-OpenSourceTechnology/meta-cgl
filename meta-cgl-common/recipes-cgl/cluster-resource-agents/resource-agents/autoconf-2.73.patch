@@ -15,16 +15,17 @@ Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
  1 file changed, 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index d682ad780..84444a525 100644
+index d682ad7..84444a5 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -883,7 +883,6 @@ else
-		-Wno-strict-aliasing
-		-Wpointer-arith
-		-Wstrict-prototypes
+ 		-Wno-strict-aliasing
+ 		-Wpointer-arith 
+ 		-Wstrict-prototypes
 -		-Wunsigned-char
-		-Wwrite-strings"
-
+ 		-Wwrite-strings"
+ 
  # Additional warnings it might be nice to enable one day
---
+-- 
 2.34.1
+
