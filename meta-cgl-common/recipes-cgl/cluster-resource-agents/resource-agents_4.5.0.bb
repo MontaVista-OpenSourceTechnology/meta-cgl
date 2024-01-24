@@ -63,6 +63,7 @@ EXTRA_OECONF += "--disable-fatal-warnings \
 do_install:append() {
     rm -rf ${D}${localstatedir}/run
     rm -rf ${D}${localstatedir}
+    sed -i 's,${TMPDIR},${bindir},g' ${D}${libdir}/ocf/lib/heartbeat/ocf-binaries
 }
 
 # tickle_tcp is published under GPLv3, we just split it into ${PN}-extra,
