@@ -62,9 +62,9 @@ do_configure:prepend() {
 
 do_install:append() {
 	install -d ${D}${sysconfdir}/default/volatiles
-	install -m 0644 ${WORKDIR}/volatiles ${D}${sysconfdir}/default/volatiles/04_cluster-glue
+	install -m 0644 ${UNPACKDIR}/volatiles ${D}${sysconfdir}/default/volatiles/04_cluster-glue
 	install -d ${D}${sysconfdir}/tmpfiles.d
-	install -m 0644 ${WORKDIR}/tmpfiles ${D}${sysconfdir}/tmpfiles.d/${PN}.conf
+	install -m 0644 ${UNPACKDIR}/tmpfiles ${D}${sysconfdir}/tmpfiles.d/${PN}.conf
 
     oe_multilib_header heartbeat/glue_config.h
 }
