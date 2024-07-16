@@ -12,7 +12,7 @@ Subject: [PATCH] don't compile doc and Error Fix
 |       http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl ha_logd.xml
 | make[2]: *** [hb_report.8] Error 127
 
-Upstream-Status: pending
+Upstream-Status: Pending
 
 Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
