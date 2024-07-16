@@ -16,7 +16,7 @@ In file included from o2cb_abi.c:52:
   loff_t d_off; /* Offset of structure in the file */
   ^~~~~~
 
-Upstream-Status: Backport[https://github.com/cheese/ocfs2-tools/commit/fa150e35931123fc630125ebef1901ffb30d421f]
+Upstream-Status: Backport [https://github.com/cheese/ocfs2-tools/commit/fa150e35931123fc630125ebef1901ffb30d421f]
 
 Signed-off-by: Robin Lee <cheeselee@fedoraproject.org>
 Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>

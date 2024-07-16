@@ -3,7 +3,7 @@ From: Li xin <lixin.fnst@cn.fujitsu.com>
 Date: Fri, 12 Dec 2014 16:15:28 +0900
 Subject: [PATCH 3/3] vendor/common/o2cb.ocf: add new conf file
 
-Upstream-Status: pending
+Upstream-Status: Pending
 
 Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---

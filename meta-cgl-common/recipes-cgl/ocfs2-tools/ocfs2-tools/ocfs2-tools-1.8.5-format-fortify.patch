@@ -1,3 +1,5 @@
+Upstream-Status: Pending
+
 diff --git a/tunefs.ocfs2/op_query.c b/tunefs.ocfs2/op_query.c
 index 295c185b..40394d15 100644
 --- a/tunefs.ocfs2/op_query.c
