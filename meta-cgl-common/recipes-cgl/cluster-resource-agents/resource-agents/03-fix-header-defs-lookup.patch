@@ -3,6 +3,8 @@ From: Bian Naimeng <biannm@cn.fujitsu.com>
 Date: Tue, 1 Apr 2014 16:20:39 +0200
 Subject: [PATCH] fix header defs lookup
 
+Upstream-Status: Pending
+
 Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 
 ---
