@@ -111,7 +111,6 @@ FILES:${PN}-cluster-libs = "${libdir}/libcrmcluster.so.*"
 RDEPENDS:${PN}-cluster-libs += "libqb"
 FILES:${PN}-remote = "${sysconfdir}/init.d/pacemaker_remote \
                       ${sbindir}/pacemaker_remoted \
-                      ${libdir}/ocf/resource.d/pacemaker/remote \
                      "
 RDEPENDS:${PN}-remote += "libqb bash"
 FILES:${PN} += " ${datadir}/snmp                             \
