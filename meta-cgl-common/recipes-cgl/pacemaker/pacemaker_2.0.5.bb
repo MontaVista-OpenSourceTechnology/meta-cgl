@@ -87,8 +87,8 @@ do_install:append() {
 
     hostdir=$(grep -Rn ${HOSTTOOLS_DIR} ${D}/* | awk -F: '{print $1}' | uniq)
     for tmpdir in $hostdir
-   do
-        sed -i "s:${HOSTTOOLS_DIR}::g" $tmpdir
+    do
+        sed -i "s:${HOSTTOOLS_DIR}/::g" $tmpdir
     done
 }
 
