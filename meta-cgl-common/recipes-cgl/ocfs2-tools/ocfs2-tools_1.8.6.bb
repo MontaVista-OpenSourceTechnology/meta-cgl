@@ -31,7 +31,7 @@ inherit autotools-brokensep pkgconfig systemd
 
 DEPENDS = "corosync pacemaker \
     libxml2 linux-libc-headers libaio \
-    e2fsprogs e2fsprogs-native \
+    e2fsprogs e2fsprogs-native readline \
 "
 
 
