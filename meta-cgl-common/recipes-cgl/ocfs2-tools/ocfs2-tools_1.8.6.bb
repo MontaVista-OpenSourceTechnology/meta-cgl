@@ -103,10 +103,10 @@ do_install:append() {
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}/${systemd_system_unitdir}
-        install -m 0644 ${WORKDIR}/o2cb.service ${D}/${systemd_system_unitdir}
+        install -m 0644 ${UNPACKDIR}/o2cb.service ${D}/${systemd_system_unitdir}
         sed -i -e 's,@LIBDIR@,${libexecdir},' ${D}${systemd_system_unitdir}/o2cb.service
 
-        install -m 0644 ${WORKDIR}/ocfs2.service ${D}/${systemd_system_unitdir}
+        install -m 0644 ${UNPACKDIR}/ocfs2.service ${D}/${systemd_system_unitdir}
         sed -i -e 's,@LIBDIR@,${libexecdir},' ${D}${systemd_system_unitdir}/ocfs2.service
 
         install -d ${D}/${libexecdir}

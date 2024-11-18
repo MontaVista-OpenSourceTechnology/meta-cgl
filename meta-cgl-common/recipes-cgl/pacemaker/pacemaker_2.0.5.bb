@@ -65,9 +65,9 @@ do_configure:prepend() {
 do_install:append() {
     install -d ${D}${sysconfdir}/default
     install -d ${D}${sysconfdir}/default/volatiles
-    install -m 0644 ${WORKDIR}/volatiles ${D}${sysconfdir}/default/volatiles/06_${BPN}
+    install -m 0644 ${UNPACKDIR}/volatiles ${D}${sysconfdir}/default/volatiles/06_${BPN}
     install -d ${D}${sysconfdir}/tmpfiles.d
-    install -m 0644 ${WORKDIR}/tmpfiles ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+    install -m 0644 ${UNPACKDIR}/tmpfiles ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
 
     # Don't package some files
     find ${D} -name "*.pyo" -exec rm {} \;
