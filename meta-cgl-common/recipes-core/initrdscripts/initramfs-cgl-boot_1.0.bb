@@ -5,7 +5,7 @@ SRC_URI = "file://init-boot.sh \
 "
 
 do_install() {
-        install -m 0755 ${WORKDIR}/init-boot.sh ${D}/init
+        install -m 0755 ${UNPACKDIR}/init-boot.sh ${D}/init
 }
 
 inherit allarch

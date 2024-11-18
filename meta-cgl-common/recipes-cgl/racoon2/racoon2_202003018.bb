@@ -59,7 +59,7 @@ do_install:append() {
 
     rmdir ${D}${localstatedir}/run/racoon2 ${D}${localstatedir}/run ${D}${localstatedir}
     install -d ${D}${sysconfdir}/default/volatiles
-    install -m 0700 ${WORKDIR}/volatiles.99_racoon2 ${D}${sysconfdir}/default/volatiles/99_racoon2
+    install -m 0700 ${UNPACKDIR}/volatiles.99_racoon2 ${D}${sysconfdir}/default/volatiles/99_racoon2
     if ${@bb.utils.contains('DISTRO_FEATURES', 'krb5', 'false', 'true', d)}; then
         rm -f ${D}${sysconfdir}/init.d/kinkd ${D}${sysconfdir}/${BPN}/init.d/kinkd \
         ${D}${sysconfdir}/${BPN}/transport_kink.conf.sample ${D}${sysconfdir}/${BPN}/tunnel_kink.conf.sample
@@ -67,8 +67,8 @@ do_install:append() {
 
     # Install systemd service files
     install -d ${D}${systemd_system_unitdir}
-    install -m 0644 ${WORKDIR}/iked.service ${D}${systemd_system_unitdir}
-    install -m 0644 ${WORKDIR}/spmd.service ${D}${systemd_system_unitdir}
+    install -m 0644 ${UNPACKDIR}/iked.service ${D}${systemd_system_unitdir}
+    install -m 0644 ${UNPACKDIR}/spmd.service ${D}${systemd_system_unitdir}
     sed -i -e 's#@SBINDIR@#${sbindir}#g' -e 's,@BASE_BINDIR@,${base_bindir},g' \
         ${D}${systemd_system_unitdir}/*.service
 

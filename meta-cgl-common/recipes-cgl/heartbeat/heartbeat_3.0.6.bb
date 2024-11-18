@@ -76,12 +76,12 @@ do_compile:prepend() {
     make clean
 }
 do_install:append () {
-    sed -i -e 's,/usr/lib/,${libdir}/,' ${WORKDIR}/heartbeat.service
+    sed -i -e 's,/usr/lib/,${libdir}/,' ${UNPACKDIR}/heartbeat.service
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${libexecdir}
         install -m 0755 ${S}/${SOURCE1} ${D}${libexecdir}/heartbeat.init
         install -d ${D}${systemd_unitdir}/system
-        install -m 0644 ${WORKDIR}/heartbeat.service ${D}${systemd_unitdir}/system/
+        install -m 0644 ${UNPACKDIR}/heartbeat.service ${D}${systemd_unitdir}/system/
     fi
 }
 

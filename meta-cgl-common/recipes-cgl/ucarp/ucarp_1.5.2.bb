@@ -46,22 +46,22 @@ do_configure:prepend() {
 
 do_install:append() {
     sed -i -e 's#\(UPSCRIPT=\).*#\1${libexecdir}/vip-up.sh#' \
-           -e 's#\(DOWNSCRIPT=\).*#\1${libexecdir}/vip-down.sh#' ${WORKDIR}/ucarp.init
+           -e 's#\(DOWNSCRIPT=\).*#\1${libexecdir}/vip-down.sh#' ${UNPACKDIR}/ucarp.init
 
-    install -D -m 0755 ${WORKDIR}/ucarp.init ${D}${sysconfdir}/init.d/ucarp
+    install -D -m 0755 ${UNPACKDIR}/ucarp.init ${D}${sysconfdir}/init.d/ucarp
 
     # For systemd
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-        install -D -m 0755 ${WORKDIR}/ucarp.init ${D}${libexecdir}/ucarp
-        install -D -m 0644 ${WORKDIR}/ucarp.service ${D}${systemd_system_unitdir}/ucarp.service
+        install -D -m 0755 ${UNPACKDIR}/ucarp.init ${D}${libexecdir}/ucarp
+        install -D -m 0644 ${UNPACKDIR}/ucarp.service ${D}${systemd_system_unitdir}/ucarp.service
         sed -i -e 's,@LIBEXECDIR@,${libexecdir},g' ${D}${systemd_system_unitdir}/ucarp.service
     fi
 
     install -m 0755 -d ${D}${sysconfdir}/ucarp
-    install -m 0600 ${WORKDIR}/vip-001.conf.example ${D}${sysconfdir}/ucarp/vip-001.conf.example
-    install -m 0600 ${WORKDIR}/vip-common.conf ${D}${sysconfdir}/ucarp/vip-common.conf
+    install -m 0600 ${UNPACKDIR}/vip-001.conf.example ${D}${sysconfdir}/ucarp/vip-001.conf.example
+    install -m 0600 ${UNPACKDIR}/vip-common.conf ${D}${sysconfdir}/ucarp/vip-common.conf
 
     install -m 0755 -d ${D}${libexecdir}
-    install -m 0700 ${WORKDIR}/vip-up.sh ${D}${libexecdir}/vip-up.sh
-    install -m 0700 ${WORKDIR}/vip-down.sh ${D}${libexecdir}/vip-down.sh
+    install -m 0700 ${UNPACKDIR}/vip-up.sh ${D}${libexecdir}/vip-up.sh
+    install -m 0700 ${UNPACKDIR}/vip-down.sh ${D}${libexecdir}/vip-down.sh
 }
