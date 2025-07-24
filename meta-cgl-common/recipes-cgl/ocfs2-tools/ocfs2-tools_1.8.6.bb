@@ -53,6 +53,8 @@ EXTRA_OECONF = " \
     --with-root-prefix=${root_prefix} \
 "
 
+EXTRA_AUTORECONF += "-I ."
+
 do_configure:prepend () {
         # fix here or EXTRA_OECONF
         sed -i -e '/^PYTHON_INCLUDES="-I/c\
