@@ -3,6 +3,7 @@ From: Jeremy Puhlman <jpuhlman@mvista.com>
 Date: Wed, 18 Mar 2020 18:49:16 +0000
 Subject: [PATCH 06/13] racoon2-fix-sadb_msg_seq-collision
 
+Upstream-Status: Pending
 ---
  iked/ike_pfkey.c | 10 +++++++++-
  1 file changed, 9 insertions(+), 1 deletion(-)

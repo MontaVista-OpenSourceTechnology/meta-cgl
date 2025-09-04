@@ -3,6 +3,7 @@ From: Jeremy Puhlman <jpuhlman@mvista.com>
 Date: Wed, 18 Mar 2020 18:58:05 +0000
 Subject: [PATCH 09/13] racoon2-iked-initscript
 
+Upstream-Status: Pending
 ---
  samples/init.d/iked.in | 9 ++++++++-
  1 file changed, 8 insertions(+), 1 deletion(-)

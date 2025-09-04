@@ -3,6 +3,7 @@ From: Jeremy Puhlman <jpuhlman@mvista.com>
 Date: Tue, 17 Mar 2020 21:11:28 +0000
 Subject: [PATCH 01/13] Add DESTDIR to install commands.
 
+Upstream-Status: Backport [https://github.com/zoulasc/racoon2/commit/517363b58ee491527ea9951577071b31b56c4dd0]
 ---
  pskgen/Makefile.am                    |  2 +-
  samples/Makefile.am                   | 24 ++++++++++----------

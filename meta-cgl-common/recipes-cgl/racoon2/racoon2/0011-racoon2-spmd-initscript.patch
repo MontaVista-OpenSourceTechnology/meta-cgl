@@ -3,6 +3,7 @@ From: Jeremy Puhlman <jpuhlman@mvista.com>
 Date: Wed, 18 Mar 2020 19:06:54 +0000
 Subject: [PATCH 11/13] racoon2-spmd-initscript
 
+Upstream-Status: Pending
 ---
  samples/init.d/spmd.in | 9 ++++++++-
  1 file changed, 8 insertions(+), 1 deletion(-)

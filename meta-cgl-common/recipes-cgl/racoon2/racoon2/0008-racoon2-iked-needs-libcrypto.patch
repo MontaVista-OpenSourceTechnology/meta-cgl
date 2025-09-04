@@ -3,6 +3,7 @@ From: Jeremy Puhlman <jpuhlman@mvista.com>
 Date: Wed, 18 Mar 2020 18:52:49 +0000
 Subject: [PATCH 08/13] racoon2-iked-needs-libcrypto
 
+Upstream-Status: Pending
 ---
  iked/Makefile.am | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

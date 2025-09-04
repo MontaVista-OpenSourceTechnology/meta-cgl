@@ -3,6 +3,7 @@ From: Jeremy Puhlman <jpuhlman@mvista.com>
 Date: Tue, 17 Mar 2020 22:09:01 +0000
 Subject: [PATCH 02/13] Enable turning of kinkd and iked
 
+Upstream-Status: Pending
 ---
  Makefile.am  |  2 +-
  configure.ac | 22 +++++++++++++++++++++-

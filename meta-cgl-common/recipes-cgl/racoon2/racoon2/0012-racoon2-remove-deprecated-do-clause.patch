@@ -3,6 +3,7 @@ From: Jeremy Puhlman <jpuhlman@mvista.com>
 Date: Wed, 18 Mar 2020 19:08:42 +0000
 Subject: [PATCH 12/13] racoon2-remove-deprecated-do-clause
 
+Upstream-Status: Pending
 ---
  pskgen/pskgen.in | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)

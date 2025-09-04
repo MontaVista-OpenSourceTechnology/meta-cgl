@@ -3,6 +3,7 @@ From: Jeremy Puhlman <jpuhlman@mvista.com>
 Date: Tue, 17 Mar 2020 22:09:52 +0000
 Subject: [PATCH 03/13] Replace perl_bindir with /usr/bin/env perl
 
+Upstream-Status: Pending
 ---
  pskgen/pskgen.in | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

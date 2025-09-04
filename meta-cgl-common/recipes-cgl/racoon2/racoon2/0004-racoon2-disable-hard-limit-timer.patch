@@ -3,6 +3,7 @@ From: Jeremy Puhlman <jpuhlman@mvista.com>
 Date: Wed, 18 Mar 2020 20:22:57 +0000
 Subject: [PATCH] racoon2-disable-hard-limit-timer
 
+Upstream-Status: Pending
 ---
  iked/ikev2_child.c | 14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)

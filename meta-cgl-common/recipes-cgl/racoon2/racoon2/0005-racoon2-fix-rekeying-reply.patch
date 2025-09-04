@@ -3,6 +3,7 @@ From: Jeremy Puhlman <jpuhlman@mvista.com>
 Date: Wed, 18 Mar 2020 18:46:16 +0000
 Subject: [PATCH 05/13] racoon2-fix-rekeying-reply
 
+Upstream-Status: Pending
 ---
  iked/ikev2.c | 2 ++
  1 file changed, 2 insertions(+)

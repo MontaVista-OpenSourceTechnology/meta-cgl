@@ -3,6 +3,7 @@ From: Jeremy Puhlman <jpuhlman@mvista.com>
 Date: Wed, 18 Mar 2020 19:01:36 +0000
 Subject: [PATCH 10/13] racoon2-kinkd-initscript
 
+Upstream-Status: Pending
 ---
  samples/init.d/kinkd.in | 9 ++++++++-
  1 file changed, 8 insertions(+), 1 deletion(-)

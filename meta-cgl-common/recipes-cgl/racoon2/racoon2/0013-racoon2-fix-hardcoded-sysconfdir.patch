@@ -3,6 +3,7 @@ From: Jeremy Puhlman <jpuhlman@mvista.com>
 Date: Wed, 18 Mar 2020 19:54:51 +0000
 Subject: [PATCH 13/13] racoon2-fix-hardcoded-sysconfdir
 
+Upstream-Status: Pending
 ---
  pskgen/autogen.spmd.pwd.in  |  8 ++++----
  samples/hook/child-down.in  |  2 +-
