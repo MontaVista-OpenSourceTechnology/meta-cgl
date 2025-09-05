@@ -33,7 +33,6 @@ SRC_URI = "git://github.com/zoulasc/racoon2;branch=master;protocol=https \
           "
 
 SRCREV="7b68950328454b0e91ba24698c10c4a790705cc1"
-S= "${WORKDIR}/git" 
 SRC_URI[md5sum] = "2fa33abff1ccd6fc22876a23db77aaa8"
 SRC_URI[sha256sum] = "f23773e4d97cec823ec634085b5e60a7884a13467ff1bffc17daac14d02f9caa"
 

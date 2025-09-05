@@ -15,7 +15,7 @@ SRC_URI = "https://cpan.metacpan.org/authors/id/U/UM/UMEMOTO/Socket6-${PV}.tar.g
 "
 SRC_URI[socket6-perl-0.29.sha256sum] = "468915fa3a04dcf6574fc957eff495915e24569434970c91ee8e4e1459fc9114"
 
-S = "${WORKDIR}/Socket6-${PV}"
+S = "${UNPACKDIR}/Socket6-${PV}"
 
 do_configure:prepend () {
 	mkdir -p m4

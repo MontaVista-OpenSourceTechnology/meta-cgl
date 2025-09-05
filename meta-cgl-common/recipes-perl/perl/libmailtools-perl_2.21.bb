@@ -20,6 +20,6 @@ PR = "r2"
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MA/MARKOV/MailTools-${PV}.tar.gz"
 SRC_URI[sha256sum] = "4ad9bd6826b6f03a2727332466b1b7d29890c8d99a32b4b3b0a8d926ee1a44cb"
 
-S = "${WORKDIR}/MailTools-${PV}"
+S = "${UNPACKDIR}/MailTools-${PV}"
 
 inherit cpan

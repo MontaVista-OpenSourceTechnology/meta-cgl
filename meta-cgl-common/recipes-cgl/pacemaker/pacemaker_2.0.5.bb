@@ -28,8 +28,6 @@ SRCREV = "ba59be71228fed04f78ab374dfac748d314d0e89"
 
 inherit autotools-brokensep pkgconfig systemd python3native python3-dir useradd
 
-S = "${WORKDIR}/git"
-
 UPSTREAM_CHECK_GITTAGREGEX = "Pacemaker-(?P<pver>\d+(\.\d+)+)"
 
 CLEANBROKEN = "1"

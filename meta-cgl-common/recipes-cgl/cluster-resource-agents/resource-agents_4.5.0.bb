@@ -28,8 +28,6 @@ SRCREV = "fee181320547365d7f8c88cca2b32801412b933d"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
-S="${WORKDIR}/git"
-
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
                     file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c \
                     file://COPYING.GPLv3;md5=d32239bcb673463ab874e80d47fae504"

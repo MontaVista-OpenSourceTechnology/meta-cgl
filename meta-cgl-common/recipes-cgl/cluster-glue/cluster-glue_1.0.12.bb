@@ -32,7 +32,6 @@ SYSTEMD_AUTO_ENABLE = "disable"
 HA_USER = "hacluster"
 HA_GROUP = "haclient"
 
-S = "${WORKDIR}/git"
 PV = "1.0.12+git${SRCPV}"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
