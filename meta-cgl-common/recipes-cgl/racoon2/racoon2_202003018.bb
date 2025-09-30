@@ -32,7 +32,7 @@ SRC_URI = "git://github.com/zoulasc/racoon2;branch=master;protocol=https \
            file://spmd.service \
           "
 
-SRCREV="7b68950328454b0e91ba24698c10c4a790705cc1"
+SRCREV = "7b68950328454b0e91ba24698c10c4a790705cc1"
 SRC_URI[md5sum] = "2fa33abff1ccd6fc22876a23db77aaa8"
 SRC_URI[sha256sum] = "f23773e4d97cec823ec634085b5e60a7884a13467ff1bffc17daac14d02f9caa"
 
@@ -84,7 +84,7 @@ INITSCRIPT_PARAMS:${PN} = "remove"
 INITSCRIPT_NAME:${PN}-iked = "iked"
 INITSCRIPT_PARAMS:${PN}-iked = "remove"
 INITSCRIPT_NAME:${PN}-kinkd = "kinkd"
-INITSCRIPT_PARAMS:${PN}-kinkd= "remove"
+INITSCRIPT_PARAMS:${PN}-kinkd = "remove"
 
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE:${PN} = "spmd.service iked.service"

@@ -43,8 +43,8 @@ EXTRA_OECONF = "--with-daemon-user=${HA_USER} \
                 --with-ocf-root=${libdir}/ocf \
                "
 
-CACHED_CONFIGUREVARS="ac_cv_path_XML2CONFIG=0 \
-                      ac_cv_path_SSH=ssh \
+CACHED_CONFIGUREVARS = "ac_cv_path_XML2CONFIG=0 \
+                        ac_cv_path_SSH=ssh \
 "
 
 USERADD_PACKAGES = "${PN}"

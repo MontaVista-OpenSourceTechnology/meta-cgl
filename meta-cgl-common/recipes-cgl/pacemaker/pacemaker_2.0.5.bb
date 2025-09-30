@@ -21,7 +21,7 @@ SRC_URI = "git://github.com/ClusterLabs/${BPN}.git;branch=main;protocol=https \
           "
 
 CFLAGS += "-I${STAGING_INCDIR}/heartbeat"
-CPPFLAGS +="-I${STAGING_INCDIR}/heartbeat"
+CPPFLAGS += "-I${STAGING_INCDIR}/heartbeat"
 SRC_URI:append:libc-musl = "file://0001-pacemaker-fix-compile-error-of-musl-libc.patch"
 
 SRCREV = "ba59be71228fed04f78ab374dfac748d314d0e89"
