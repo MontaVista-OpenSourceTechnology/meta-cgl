@@ -42,6 +42,10 @@ EXTRA_OECONF += "--sysconfdir=${sysconfdir}/${BPN}"
 # fix the perms for config.rpath
 do_configure:prepend() {
     chmod 755 ${S}/config.rpath
+    # Make sure po directory is writable by current user
+    if [ -d "${S}/po" ]; then
+        chmod -R u+rw ${S}/po
+    fi
 }
 
 do_install:append() {
