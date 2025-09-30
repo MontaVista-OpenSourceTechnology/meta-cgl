@@ -33,8 +33,6 @@ SRC_URI = "git://github.com/zoulasc/racoon2;branch=master;protocol=https \
           "
 
 SRCREV = "7b68950328454b0e91ba24698c10c4a790705cc1"
-SRC_URI[md5sum] = "2fa33abff1ccd6fc22876a23db77aaa8"
-SRC_URI[sha256sum] = "f23773e4d97cec823ec634085b5e60a7884a13467ff1bffc17daac14d02f9caa"
 
 inherit autotools-brokensep update-rc.d systemd
 
@@ -51,6 +49,8 @@ CLEANBROKEN = "1"
 do_configure:prepend () {
     mkdir -p lib/m4 spmd/m4 iked/m4 kinkd/m4
 }
+
+EXTRA_OEMAKE += "CPPFLAGS='${CFLAGS}'"
 
 do_install:append() {
     install -d -m 0755 ${D}${sysconfdir}/init.d/
